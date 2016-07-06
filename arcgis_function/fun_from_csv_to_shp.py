@@ -1,9 +1,12 @@
 import arcpy
 import os
 
+
 def make_event_layer(in_table, out_subdir, base_name):
     if not os.path.exists(out_subdir):
         os.mkdir(out_subdir)
+    if os.path.exists(os.path.join(out_subdir, base_name + '.shp')):
+        return
     x_coords = "longitude"
     y_coords = "latitude"
     spRef = r"D:/Dian/Data/United_States_2000/background/Coordinate.prj"

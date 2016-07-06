@@ -1,6 +1,6 @@
 import csv
 
-def region_process(input_csv):
+def region_process(value):
     try:
         value = int(value)
         if value in [30,38,56,46,31]:
