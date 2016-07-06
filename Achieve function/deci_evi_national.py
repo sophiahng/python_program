@@ -4,7 +4,10 @@ import glob
 from arcpy.sa import *
 import arcgisscripting
 from arcgis_function.fun_extract_by_mask import extract_by_mask
+from arcgis_function.fun_from_raster_to_polygon import raster_polygon
 from arcgis_function.fun_intersect_raster import intersect_raster
+from arcgis_function.fun_calculate_polygon_area import calculate_polygon_area
+from arcgis_function.fun_select_analysis import select_analysis
 
 Urban_PATH = os.path.normcase("D:\Dian\Data\United_States_2010/Urban_area_2010.shp")
 EVI_PATH = os.path.normcase("G:\evi extract/")
@@ -23,7 +26,11 @@ for file in deci_files:
     in_rasters.append(file)
 intersect_raster(in_rasters, os.path.normcase(deci_national,), 41)
 
+raster_polygon(deci_national,deci_national)
 
+calculate_polygon_area(deci_national,deci_national)
+
+select_analysis(deci_national,deci_evi_mask,"Farea>1")
 
 
 
