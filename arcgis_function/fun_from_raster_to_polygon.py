@@ -9,7 +9,7 @@ def raster_polygon(in_raster_paths, out_polygon_path):
     if os.path.exists(os.path.basename(out_polygon_path)):
         return
     arcpy.CheckOutExtension("Spatial")
-    gp.RasterToPolygon_conversion(in_raster_paths, out_polygon_path, "NO_SIMPLIFY")
+    gp.RasterToPolygon_conversion(in_raster_paths, out_polygon_path, "SIMPLIFY")
 
 
 if __name__ == "__main__":
