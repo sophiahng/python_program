@@ -6,28 +6,27 @@ import arcgisscripting
 from arcgis_function.fun_extract_by_mask import extract_by_mask
 from arcgis_function.fun_intersect_raster import intersect_raster
 
-NORTHEAST_PATH = os.path.normcase("D:\Dian\Data\United_States_2010\Northeast.shp")
 Urban_PATH = os.path.normcase("D:\Dian\Data\United_States_2010/Urban_area_2010.shp")
 EVI_PATH = os.path.normcase("G:\evi extract/")
 LAND_PATH = os.path.normcase("D:\Dian\Data\Land_Use/")
-OUTPUT_PATH = os.path.normcase("G:\EVI_deci_northeast")
+OUTPUT_PATH = os.path.normcase("G:\EVI_deci_national")
 
 if not os.path.exists(OUTPUT_PATH):
     os.mkdir(OUTPUT_PATH)
 
-deci_northeast = os.path.join(OUTPUT_PATH, "deci_northeast")
+deci_national = os.path.join(OUTPUT_PATH, "deci_national")
 deci_file_names = ['deci_for_2001', 'deci_for_2006', 'deci_for_2011']
 deci_files = [os.path.join(LAND_PATH, file_name) for file_name in deci_file_names]
 
-for deci_file in deci_files:
-    extract_by_mask(deci_file, NORTHEAST_PATH, deci_northeast)
-
-
 in_rasters = []
-for file in deci_northeast:
+for file in deci_files:
     in_rasters.append(file)
+intersect_raster(in_rasters, os.path.normcase(deci_national,), 41)
 
-intersect_raster(in_rasters, os.path.normcase(deci_northeast,), 41)
+
+
+
+
 # deci_files = []
 # for file_name in deci_file_names:
 #     file_name_paht = os.path.join(LAND_PATH, file_name)
