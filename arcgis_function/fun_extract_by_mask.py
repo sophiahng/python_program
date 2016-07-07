@@ -10,6 +10,7 @@ def extract_by_mask(inRaster, inMaskData, output_file):
         os.mkdir(os.path.dirname(output_file))
     if os.path.exists(output_file):
         return
+    print "processing extract by mask..."
     outExtractByMask = ExtractByMask(inRaster, inMaskData)
     outExtractByMask.save(output_file)
     print("%s has been produced" % output_file)

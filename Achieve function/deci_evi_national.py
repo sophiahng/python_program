@@ -20,8 +20,6 @@ OUTPUT_PATH = os.path.normcase("G:\EVI_deci_national")
 if not os.path.exists(OUTPUT_PATH):
     os.mkdir(OUTPUT_PATH)
 
-
-
 deci_national = os.path.join(OUTPUT_PATH, "deci_national")
 deci_file_names = ['deci_for_2001', 'deci_for_2006', 'deci_for_2011']
 deci_files = [os.path.join(LAND_PATH, file_name) for file_name in deci_file_names]
@@ -41,18 +39,36 @@ deci_region = os.path.join(OUTPUT_PATH, "deci_Region")
 name_map_dict = {"Northwest": 'NW', "West North Central": 'WNC', "West": 'W', "Southwest": 'SW',
                  "East North Central": 'ENC', "Central": 'C', "South": 'S', "Southeast": 'SE', "Northeast": 'NE'}
 for Region_name in Region_names:
-    Region_base_name = name_map_dict[os.path.basename(Region_name)[:-4]]
-    extract_by_mask(deci_national, Region_name, os.path.join(deci_region, "deci_" + Region_base_name))
+    Region_deci_raster_name = "deci_" + name_map_dict[os.path.basename(Region_name)[:-4]]
+    Region_deci_raster = os.path.join(deci_region, Region_deci_raster_name)
+    extract_by_mask(deci_national, Region_name, Region_deci_raster)
+    Region_deci_polygon = Region_deci_raster + ".shp"
+    raster_polygon(Region_deci_raster, Region_deci_polygon)
+    calculate_polygon_area(Region_deci_polygon, Region_deci_polygon[:-4] + "_area.shp")
+    deci_evi_mask_subdir = os.path.join(OUTPUT_PATH, "evi_mask")
+    deci_evi_mask_name = Region_deci_polygon[:-4] + "_mask.shp"
+    deci_evi_mask_path = os.path.join(deci_evi_mask_subdir, deci_evi_mask_name)
+    select_analysis(deci_national, deci_evi_mask_path, "Farea>1000000")
+
+evi_mask_files = glob.glob(os.path.join(deci_evi_mask_subdir,"*.shp"))
+evi_files = glob.glob(os.path.join(EVI_PATH,"*.tiff"))
+
+for evi_mask_file in evi_mask_files:
+    extract_file_subdir = os.path.join(OUTPUT_PATH, evi_mask_files[:-4])
+    extract_file_name = os.path.join(extract_file_subdir, evi_files)
 
 
 
-raster_polygon(deci_national,out_polygon)
 
 
-calculate_polygon_area(deci_national,out_polygon)
+
+
+
+
+
 
 out_polygon = os.path.join(OUTPUT_PATH, "deci_national.shp")
-select_analysis(deci_national,deci_evi_mask,"Farea>1")
+
 
 
 
