@@ -8,14 +8,19 @@ from arcgis_function.fun_from_raster_to_polygon import raster_polygon
 from arcgis_function.fun_intersect_raster import intersect_raster
 from arcgis_function.fun_calculate_polygon_area import calculate_polygon_area
 from arcgis_function.fun_select_analysis import select_analysis
+from arcgis_function.fun_split_features import split_features
 
 Urban_PATH = os.path.normcase("D:\Dian\Data\United_States_2010/Urban_area_2010.shp")
 EVI_PATH = os.path.normcase("G:\evi extract/")
 LAND_PATH = os.path.normcase("D:\Dian\Data\Land_Use/")
+REGION_PATH = os.path.normcase("D:\Dian\Data\United_States_2010/Region.shp")
 OUTPUT_PATH = os.path.normcase("G:\EVI_deci_national")
-
+# Region_names = ["Northwest", "West North Central", "West", "Southwest", "East North Central", "Central",
+#                 "South", "Southeast", "Northeast"]
 if not os.path.exists(OUTPUT_PATH):
     os.mkdir(OUTPUT_PATH)
+
+
 
 deci_national = os.path.join(OUTPUT_PATH, "deci_national")
 deci_file_names = ['deci_for_2001', 'deci_for_2006', 'deci_for_2011']
@@ -26,10 +31,27 @@ for file in deci_files:
     in_rasters.append(file)
 intersect_raster(in_rasters, os.path.normcase(deci_national,), 41)
 
-raster_polygon(deci_national,deci_national)
+out_workspace = os.path.join(os.path.dirname(REGION_PATH),"climate_region")
+split_features(REGION_PATH,REGION_PATH,"Climate",out_workspace)
 
-calculate_polygon_area(deci_national,deci_national)
+Region_names = glob.glob(os.path.join(out_workspace,"*.shp"))
 
+deci_region = os.path.join(OUTPUT_PATH, "deci_Region")
+
+name_map_dict = {"Northwest": 'NW', "West North Central": 'WNC', "West": 'W', "Southwest": 'SW',
+                 "East North Central": 'ENC', "Central": 'C', "South": 'S', "Southeast": 'SE', "Northeast": 'NE'}
+for Region_name in Region_names:
+    Region_base_name = name_map_dict[os.path.basename(Region_name)[:-4]]
+    extract_by_mask(deci_national, Region_name, os.path.join(deci_region, "deci_" + Region_base_name))
+
+
+
+raster_polygon(deci_national,out_polygon)
+
+
+calculate_polygon_area(deci_national,out_polygon)
+
+out_polygon = os.path.join(OUTPUT_PATH, "deci_national.shp")
 select_analysis(deci_national,deci_evi_mask,"Farea>1")
 
 
