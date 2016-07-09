@@ -18,7 +18,7 @@ SITELIST_NAMES = ["sitelist_9099.csv","sitelist_0009.csv","sitelist_1014.csv"]
 site_files = [os.path.join(SITELIST_SUBDIR, item) for item in SITELIST_NAMES]
 output_subdir = "D:\Dian\Data\United_States_2010\sites_shp_of_3per"
 for site_file in site_files:
-    make_event_layer(site_file, output_subdir, os.path.basename(site_file)[:-4])
+    make_event_layer(site_file, site_file[:-4]+".shp")
 
 for site_name, urban_name in zip(SITELIST_NAMES, URBAN_NAMES):
     total_site = os.path.join(output_subdir, site_name[:-4] + '.shp')
@@ -26,6 +26,8 @@ for site_name, urban_name in zip(SITELIST_NAMES, URBAN_NAMES):
     year_range = site_name[-8:-4]
     output_features = os.path.join(output_subdir, "site_ur_" + year_range + ".shp")
     loc_ur(total_site, urban_polygon, output_features)
+
+
 
 csv_files = glob.glob(os.path.join(output_subdir, "*.csv"))
 for csv_file in csv_files:
