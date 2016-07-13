@@ -10,8 +10,11 @@ def make_event_layer(in_table, out_shp):
     x_coords = "longitude"
     y_coords = "latitude"
     spRef = r"D:/Dian/Data/United_States_2000/background/Coordinate.prj"
-    arcpy.MakeXYEventLayer_management(in_table, x_coords, y_coords, os.path.basename(out_shp[:-4]), spRef)
-    arcpy.FeatureClassToShapefile_conversion(os.path.basename(out_shp[:-4]), out_shp)
+    out_layer = os.path.basename(out_shp)[:-4]
+    # saved_layer = out_shp[:-4]+".lyr"
+    arcpy.MakeXYEventLayer_management(in_table, x_coords, y_coords, out_layer, spRef)
+    # arcpy.SaveToLayerFile_management(out_layer, saved_layer)
+    arcpy.FeatureClassToShapefile_conversion(out_layer, os.path.dirname(out_shp))
 
 if __name__ == "__main__":
     pass

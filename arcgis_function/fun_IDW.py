@@ -9,7 +9,7 @@ arcpy.env.Workspace = os.path.normcase("D:/Dian/process/")
 def idw(inPointFeatures, zField, out_raster, in_Mask):
     if not os.path.exists(os.path.dirname(out_raster)):
         os.mkdir(os.path.dirname(out_raster))
-    if os.path.exists(os.path.basename(out_raster)):
+    if os.path.exists(out_raster):
         return
     cellSize = 0.02
     power = 2
