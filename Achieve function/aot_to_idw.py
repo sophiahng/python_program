@@ -1,6 +1,6 @@
 from arcgis_function.fun_IDW import idw
 from arcgis_function.csv_to_shp import make_event_layer
-from arcgis_function.fun_extract_by_mask import extract_by_mask
+from arcgis_function.extract_by_mask import extract_by_mask
 import os
 import glob
 

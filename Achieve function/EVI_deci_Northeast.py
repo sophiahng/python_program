@@ -3,7 +3,7 @@ import os
 import glob
 from arcpy.sa import *
 import arcgisscripting
-from arcgis_function.fun_extract_by_mask import extract_by_mask
+from arcgis_function.extract_by_mask import extract_by_mask
 from arcgis_function.fun_intersect_raster import intersect_raster
 
 NORTHEAST_PATH = os.path.normcase("D:\Dian\Data\United_States_2010\Northeast.shp")

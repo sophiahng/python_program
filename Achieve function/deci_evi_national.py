@@ -1,7 +1,7 @@
 import arcpy
 import os
 import glob
-from arcgis_function.fun_extract_by_mask import extract_by_mask
+from arcgis_function.extract_by_mask import extract_by_mask
 from arcgis_function.fun_from_raster_to_polygon import raster_polygon
 from arcgis_function.fun_intersect_raster import intersect_raster
 from arcgis_function.fun_calculate_polygon_area import calculate_polygon_area
