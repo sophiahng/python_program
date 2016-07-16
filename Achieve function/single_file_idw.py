@@ -3,11 +3,11 @@ from arcgis_function.csv_to_shp import make_event_layer
 import os
 import glob
 
-AOT_SUBDIR = os.path.normcase("D:\Dian\Data/2012")
-AOTS = ["aot49_2012.csv"]
+AOT_SUBDIR = os.path.normcase("D:\Dian\Data/Ozone")
+AOTS = ["daily_mean.csv"]
 
 input_csvs = [os.path.join(AOT_SUBDIR, aot) for aot in AOTS]
-out_subdir = os.path.normcase("D:\Dian\Spatial_Image\Ozone2012")
+out_subdir = os.path.normcase("D:\Dian\Spatial_Image/Try_average")
 
 in_mask = os.path.normcase("D:/Dian/Data/United_States_2000/background/newstates.shp")
 

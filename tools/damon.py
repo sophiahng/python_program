@@ -5,12 +5,17 @@ import os
 import arcpy
 from arcpy import env
 
-env.workspace = os.path.normcase("D:\yang")
 
+env.workspace = os.path.normcase("D:\yang")
+env.overwriteOutput = True
 
 OZONE_SHP_SUBDIR = os.path.normcase("G:\Environment\Ozone aot junaug layer")
+REGION_MASK = os.path.normcase("D:\Dian\Data\United_States_2010\climate_region")
+
 EVI_REGION_C_SUBDIR = os.path.normcase("G:\evi_deci_national\evi_region\evi_C")
 EVI_REGION_MASK_SUBDIR = os.path.normcase("G:\evi_deci_national\evi_mask")
+
+
 
 #
 # ozone_shp_file = os.path.join(OZONE_SHP_SUBDIR, "aotjunaug_2000layer.shp")
@@ -43,7 +48,11 @@ def ozone_evi_match(ozone_shp_file, evi_shp_file, output_shp_file):
                                field_mappings, "WITHIN_A_DISTANCE", search_radius=20000)
 
 
-ozone_shp_file = os.path.join(OZONE_SHP_SUBDIR, "aotjunaug_2000layer.shp")
+
+# central_mask_shp = os.path.join(REGION_MASK, "Central.shp")
+# arcpy.Clip_analysis(os.path.join(OZONE_SHP_SUBDIR, "aotjunaug_2000layer.shp"), central_mask_shp, "ozone.shp")
+
+ozone_shp_file = "ozone.shp"
 evi_shp_file = "evi.shp"
 output_shp_file = "output.shp"
 
