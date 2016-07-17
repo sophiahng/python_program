@@ -4,7 +4,7 @@ import os
 import glob
 
 AOT_SUBDIR = os.path.normcase("D:\Dian\Data/Ozone")
-AOTS = ["daily_mean.csv"]
+AOTS = ["dayave_mean.csv"]
 
 input_csvs = [os.path.join(AOT_SUBDIR, aot) for aot in AOTS]
 out_subdir = os.path.normcase("D:\Dian\Spatial_Image/Try_average")
