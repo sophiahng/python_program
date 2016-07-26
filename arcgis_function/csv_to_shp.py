@@ -7,9 +7,9 @@ def make_event_layer(in_table, out_shp):
         os.mkdir(os.path.dirname(out_shp))
     if os.path.exists(out_shp):
         return
-    x_coords = "longitude"
-    y_coords = "latitude"
-    spRef = r"D:/Dian/Data/United_States_2000/background/Coordinate.prj"
+    x_coords = "Longitude"
+    y_coords = "Latitude"
+    spRef = r"D:/Dian/Spatial_Files/United_States_2000/background/Coordinate.prj"
     out_layer = os.path.basename(out_shp)[:-4]
     # saved_layer = out_shp[:-4]+".lyr"
     arcpy.MakeXYEventLayer_management(in_table, x_coords, y_coords, out_layer, spRef)
