@@ -1,5 +1,6 @@
-from arcgis_function.fun_IDW import idw
+from arcgis_function.Idw import idw
 from arcgis_function.csv_to_shp import make_event_layer
+from arcgis_function.Kriging import Krig
 import os
 import glob
 
@@ -18,7 +19,8 @@ for input_csv in input_csvs:
 input_features = [out_shp]
 
 for input_feature in input_features:
-    idw(input_feature, "Aot4_9_reg", os.path.join(out_subdir,"Aot4_9"), in_mask)
+    idw(input_feature, "Aot4_9_reg", os.path.join(out_subdir,"Aotidw"), in_mask)
+    Krig(input_feature, "Aot4_9_reg", os.path.join(out_subdir,"Aotkr"), in_mask)
 
 
 

@@ -15,6 +15,7 @@ def idw(inPointFeatures, zField, out_raster, in_Mask):
     arcpy.CheckOutExtension("GeoStats")
     arcpy.IDW_ga(inPointFeatures, zField, "", total_raster, cellSize, power)
     outExtractByMask = ExtractByMask(total_raster, in_Mask)
+    arcpy.Delete_management(total_raster)
     outExtractByMask.save(out_raster)
     arcpy.BuildPyramids_management(out_raster)
 
