@@ -63,9 +63,9 @@ if __name__ == "__main__":
         land_cover_ras = "land_cover.tif"
     if not os.listdir(os.path.join(env.workspace, "evis_for_41")):
         filter_evi(land_cover_ras)
-    locations = get_points_location()
-    for location in locations:
-        center_point = arcpy.Point(location[0], location[1])
+    # locations = get_points_location()
+    # for location in locations:
+    #     center_point = arcpy.Point(location[0], location[1])
 
 
 
